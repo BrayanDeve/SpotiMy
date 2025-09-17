@@ -5,14 +5,12 @@
 
 import { renderUserProfile, loginBtn, logoutBtn, logoutUser } from './profile.js';
 
+// ===== Configurações do Spotify vindo do config.js=====
+import { CLIENT_ID, REDIRECT_URI, SCOPES } from './config.js';
+
 // ===== Keys no localStorage =====
 const STORAGE_KEY = 'spotify_token';
 const STORAGE_REFRESH = 'spotify_refresh_token';
-
-// ===== Configurações do Spotify =====
-const CLIENT_ID = '01ddad056ee848919e2000dea761c2c2';
-const REDIRECT_URI = 'http://127.0.0.1:5501/src/index.html';
-const SCOPES = 'user-top-read user-read-private';
 
 // ===========================================
 // PKCE: gera code verifier aleatório

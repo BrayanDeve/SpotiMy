@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const cors = require('cors');
@@ -6,9 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ===== Configurações do Spotify =====
-const CLIENT_ID = '01ddad056ee848919e2000dea761c2c2';
-const REDIRECT_URI = 'http://127.0.0.1:5501/src/index.html';
+// ===== Configurações do Spotify vindas do .env =====
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 // ===========================================
 // Troca authorization code por access token
@@ -50,7 +52,7 @@ app.post('/exchange_token', async (req, res) => {
 });
 
 // ===========================================
-// 2️⃣ Atualiza access_token usando refresh_token
+// Atualiza access_token usando refresh_token
 // ===========================================
 app.post('/refresh_token', async (req, res) => {
     const { refresh_token } = req.body;
@@ -75,14 +77,12 @@ app.post('/refresh_token', async (req, res) => {
         }
 
         const data = await response.json();
-        // data terá novo access_token (às vezes refresh_token também)
         res.json(data);
     } catch (err) {
         console.error('Erro refresh token:', err);
         res.status(500).json({ error: 'Erro ao atualizar token' });
     }
 });
-
 
 // ===========================================
 // Inicialização do servidor
