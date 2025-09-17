@@ -1,0 +1,222 @@
+/* ========================================================
+   Home Page estilo SpotiMy - UX (ajustado)
+   ======================================================== */
+
+/* ===== Corpo da página ===== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* ALTERADO: manter header no topo */
+    align-items: center;
+    min-height: 100dvh;
+    padding-top: 24px; /* espaçamento para o topo */
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Container principal para limitar largura e centralizar conteúdo */
+.home-container {
+    width: 100%;
+    max-width: 1100px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* ===== Header ===== */
+.home-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+/* ===== Perfil do usuário (suporta .user-profile e .auth-profile) ===== */
+.user-profile,
+.auth-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-start;
+    min-width: 0; /* evita overflow do nome */
+}
+
+/* avatar (suporta .user-avatar e img dentro de .auth-profile) */
+.user-avatar,
+.auth-profile img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1DB954;
+    display: block;
+}
+
+/* nome do usuário (suporta .user-name e span dentro de .auth-profile) */
+.user-name,
+.auth-profile span {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: #1DB954;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 180px;
+}
+
+/* ===== Botões de autenticação ===== */
+/* Header buttons: inline (lado a lado) por padrão */
+.auth-buttons {
+    display: flex;
+    flex-direction: row; /* ALTERADO: ficam lado a lado no header */
+    gap: 10px;
+    align-items: center;
+    margin-top: 0;
+}
+
+/* mantém as regras de botão, mas escopo para header evita conflito com nav */
+.home-header .home-link-btn {
+    display: inline-block;
+    width: auto;
+    max-width: none;
+    padding: 10px 18px;
+}
+
+/* Login (verde) */
+#login-btn {
+    background-color: #1DB954;
+    color: #fff;
+}
+
+#login-btn:hover {
+    background-color: #1ed760;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+/* Logout (vermelho) - continua escondido até logar */
+#logout-btn {
+    background-color: #851405;
+    color: #fff;
+    display: none;
+}
+
+#logout-btn:hover {
+    background-color: #cc210e;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+/* ===== Título principal ===== */
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #1DB954;
+}
+
+/* ===== Descrição da página ===== */
+p {
+    font-size: 1.2em;
+    margin-bottom: 24px;
+    color: #b3b3b3;
+}
+
+/* ===== Botões genéricos (nav) ===== */
+.home-link-btn {
+    text-align: center;
+    padding: 14px 35px;
+    margin: 10px auto;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: all 0.26s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+/* Específico para os botões do nav (empilhados, largura limitada) */
+.home-nav .home-link-btn {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    color: #181818;
+    background-color: #858585;
+}
+
+/* hover nav */
+.home-nav .home-link-btn:hover {
+    background-color: #1ed760;
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+/* ===== Área principal ===== */
+.home-main {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* ===== iframe (playlist) responsivo ===== */
+.iframe-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 18px auto 0;
+    background: transparent;
+    /* aspecto 16:9 — navegadores modernos suportam aspect-ratio */
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 480px) {
+    h1 { font-size: 2.2em; }
+    p { font-size: 1em; margin-bottom: 18px; }
+    .home-link-btn {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    /* No mobile, empilha os botões de autenticação (melhor usabilidade) */
+    .auth-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    /* Diminuir avatar/no nome truncado */
+    .user-avatar,
+    .auth-profile img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .user-name,
+    .auth-profile span {
+        max-width: 120px;
+        font-size: 1em;
+    }
+}
